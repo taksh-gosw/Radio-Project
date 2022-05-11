@@ -77,10 +77,12 @@ while True:
         display.text('RX: ', 0, 0, 1)
         display.text(packet_text, 25, 0, 1)
         #Here we could perform various actions based on
-        #what the text is, example, temperature detection
-        #(A) for temp detection
-        #(B) for current time
-        #(C) for both in sequence.
+        #what the text is, example, send the present time
+        #(A) for send time
+        if "A" in packet_text:
+            time_data = bytes(("Current time = " +
+                              str(time.time()), "utf-8")
+            rfm69.send(time_data)
         time.sleep(1)
 
     #Fall through is intentional. First we read then we write.
