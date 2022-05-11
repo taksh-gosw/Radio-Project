@@ -70,7 +70,7 @@ while True:
     #Here, we keep waiting with this display till we receive
     #a  packet.
     else:
-        # Display the packet text and rssi
+        # Display the packet text
         display.fill(0)
         prev_packet = packet
         packet_text = str(prev_packet, "utf-8")
@@ -79,29 +79,37 @@ while True:
         #Here we could perform various actions based on
         #what the text is, example, send the present time
         #(A) for send time
+        #Similarly, for B and C we could have special roles as well.
+        #Distant clock
+        
         if "A" in packet_text:
             time_data = bytes(("Current time = " +
                               str(time.time()), "utf-8")
             rfm69.send(time_data)
         time.sleep(1)
+                              
 
     #Fall through is intentional. First we read then we write.
 
     if not btnA.value:
         # Send Button A
+        #This acts as a trigger for the distant clock's time information to arrive
         display.fill(0)
         button_a_data = bytes("Button A!\r\n","utf-8")
         rfm69.send(button_a_data)
         display.text('Sent Button A!', 25, 15, 1)
 
     elif not btnB.value:
+        # Normal button    
         # Send Button B
         display.fill(0)
         button_b_data = bytes("Button B!\r\n","utf-8")
         rfm69.send(button_b_data)
         display.text('Sent Button B!', 25, 15, 1)
-    elif not btnC.value:
+                              
+    elif not btnC.value:                  
         # Send Button C
+        # Normal button
         display.fill(0)
         button_c_data = bytes("Button C!\r\n","utf-8")
         rfm69.send(button_c_data)
