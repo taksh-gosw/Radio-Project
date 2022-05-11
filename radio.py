@@ -18,8 +18,10 @@ from digitalio import DigitalInOut, Direction, Pull
 import board
 # Import the SSD1306 module.
 import adafruit_ssd1306
-# Import the RFM9X radio module.
-import adafruit_rfm9x
+# Import the RFM69 radio module.
+import adafruit_rfm69
+#This could be replaced by RFM9X as well.
+
 
 # Button A
 btnA = DigitalInOut(board.D5)
@@ -54,6 +56,9 @@ CS = DigitalInOut(board.CE1)
 RESET = DigitalInOut(board.D25)
 spi = busio.SPI(board.SCK, MOSI=board.MOSI, MISO=board.MISO)
 rfm69 = adafruit_rfm69.RFM69(spi, CS, RESET, 915.0)
+
+#RFM9X would also work instead of RFM69
+
 prev_packet = None
 
 while True:
